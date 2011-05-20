@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="Eclipse4Haskell.category1"
+            name="views">
+      </category>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="eclipse4haskell.editors.HSEditor"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            extensions="hs,lhs"
+            icon="icons/HSlogo.gif"
+            id="eclipse4haskell.editors.HSEditor"
+            name="Haskell souce editor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="Eclipse4Haskell"
+            name="Haskell">
+      </category>
+      <wizard
+            category="Eclipse4Haskell"
+            class="eclipse4haskell.wizards.NewHsFileWizard"
+            icon="icons/HSlogo.gif"
+            id="eclipse4haskell.wizards.NewHsFileWizard"
+            name="Make new HS file">
+      </wizard>
+   </extension>
+   <extension
+         id="HSBuilder"
+         name="Haskell プロジェクトビルダー"
+         point="org.eclipse.core.resources.builders">
+      <builder
+            hasNature="true">
+         <run
+               class="eclipse4haskell.builder.HSBuilder">
+         </run>
+      </builder>
+   </extension>
+   <extension
+         id="HSNature"
+         name="Haskell プロジェクトネーチャー"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="eclipse4haskell.builder.HSNature">
+         </run>
+      </runtime>
+      <builder
+            id="Eclipse4Haskell.HSBuilder">
+      </builder>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            id="Eclipse4Haskell.contribution1"
+            nameFilter="*"
+            objectClass="org.eclipse.core.resources.IProject">
+         <action
+               class="eclipse4haskell.builder.ToggleNatureAction"
+               enablesFor="+"
+               id="Eclipse4Haskell.addRemoveNatureAction"
+               label="サンプル・ネーチャーの追加/除去"
+               menubarPath="additions">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         id="xmlProblem"
+         name="XML 問題"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+      <persistent
+            value="true">
+      </persistent>
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="Eclipse4Haskell.actionSet"
+            label="Haskell Action set"
+            visible="true">
+         <menu
+               id="sampleMenu"
+               label="サンプル・メニュー(&amp;M)">
+            <separator
+                  name="sampleGroup">
+            </separator>
+         </menu>
+         <action
+               class="eclipse4haskell.actions.SampleAction"
+               icon="icons/sample.gif"
+               id="eclipse4haskell.actions.SampleAction"
+               label="サンプル・アクション(&amp;S)"
+               menubarPath="sampleMenu/sampleGroup"
+               toolbarPath="sampleGroup"
+               tooltip="Hello, Eclipse world">
+         </action>
+      </actionSet>
+   </extension>
+
+</plugin>
